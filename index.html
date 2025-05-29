@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMO対策コンサルティング戦略 SPA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .sidebar { transition: transform 0.3s ease-in-out; }
+        .main-content { transition: margin-left 0.3s ease-in-out; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .accordion-content.open { max-height: 1000px; /* 十分な高さを指定 */ transition: max-height 0.5s ease-in; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tooltip { position: relative; display: inline-block; }
+        .tooltip .tooltiptext { visibility: hidden; width: 160px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -80px; opacity: 0; transition: opacity 0.3s; }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+        .scroll-to-top { position: fixed; bottom: 20px; right: 20px; background-color: #0369a1; color: white; padding: 10px 15px; border-radius: 50%; display: none; cursor: pointer; z-index: 1000; }
+        .sidebar-item.active { background-color: #0ea5e9; color: white; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <div class="flex">
+        <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 z-30 w-64 bg-sky-700 text-white p-4 space-y-2 transform -translate-x-full md:translate-x-0 md:block">
+            <h1 class="text-2xl font-bold mb-6">LLMO戦略</h1>
+            <nav>
+                <a href="#hero" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">はじめに</a>
+                <a href="#llmo-basics" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">1. LLMOの基礎</a>
+                <a href="#ai-mechanism" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">2. AIの仕組み</a>
+                <a href="#llmo-strategies" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">3. 実践戦略</a>
+                <a href="#success-path" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">4. 成功への道</a>
+                <a href="#japan-market" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">5. 日本市場</a>
+                <a href="#tools" class="sidebar-item block py-2.5 px-4 rounded hover:bg-sky-600 transition duration-200">6. 関連ツール</a>
+            </nav>
+        </aside>
+
+        <main id="main-content" class="main-content flex-1 p-4 md:ml-64 min-h-screen">
+            <div class="md:hidden flex justify-between items-center mb-4">
+                <h1 class="text-xl font-bold text-sky-700">LLMO戦略 SPA</h1>
+                <button id="mobile-menu-button" class="text-sky-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <section id="hero" class="pt-16 pb-8 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-3xl font-bold text-sky-700 mb-4">SEO対策の進化形：LLMO（大規模言語モデル最適化）へようこそ</h2>
+                <p class="mb-4 text-lg">このインタラクティブガイドは、「LLMO対策コンサルティング調査」レポートに基づき、AI時代における検索エンジン最適化の新しいフロンティアを探求します。LLMOは、ChatGPTのような生成AIが情報を提示する際に、自社のコンテンツやブランドが効果的に参照・引用されることを目指す戦略です。</p>
+                <p class="mb-4">従来のSEOが検索順位に焦点を当てていたのに対し、LLMOはAIが生成する「回答の質と内容」に直接影響を与えることを目指します。ユーザーの検索行動が対話型へとシフトする現代において、LLMOへの取り組みはブランド認知と競争優位性確立の鍵となります。</p>
+                <p>本ガイドを通じて、LLMOの基本、AIの情報参照メカニズム、具体的な戦略、成功事例、効果測定、そして日本市場における展望まで、包括的にご理解いただけます。</p>
+            </section>
+
+            <section id="llmo-basics" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">1. LLMO（大規模言語モデル最適化）の基礎</h2>
+                <p class="mb-6">このセクションでは、LLMOの基本的な概念、従来のSEOとの関係性、そして現代のデジタルマーケティングにおいてなぜLLMOが重要視されるのかについて解説します。</p>
+                
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-t-md font-semibold text-sky-700 flex justify-between items-center">
+                        1.1. LLMOとは何か？
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p>LLMO（Large Language Model Optimization）とは、大規模言語モデルがコンテンツを発見し、分析しやすくするための一連のプロセスです。主な目的は、ユーザーがChatGPT、Geminiなどの会話型AIツールを利用して情報を求める際に、AIが生成する回答内容そのものに影響を与え、自社のブランドやコンテンツが信頼できる情報源として引用・言及されることを目指すものです。</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 font-semibold text-sky-700 flex justify-between items-center">
+                        1.2. SEOとLLMOの関係性：類似点と相違点
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-2"><strong class="text-sky-600">類似点:</strong> コンテンツの発見可能性を高め、ウェブサイトへのトラフィックを誘導するという共通目標を持ちます。明確な見出しを持つ構造化されたコンテンツなどは双方に有益です。</p>
+                        <p><strong class="text-sky-600">相違点:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><span class="font-semibold">SEO:</span> 特定検索エンジンのランキング向上とクリック促進が主目的。</li>
+                            <li><span class="font-semibold">LLMO:</span> AI生成回答内で信頼できる情報源として引用・好意的言及を目指す。対象は広範なAIツール。</li>
+                            <li><span class="font-semibold">コンテンツ焦点:</span> SEOはキーワード、サイト構造、バックリンク重視。LLMOは引用、統計データ、エンティティリサーチ、E-E-A-Tの文脈的評価を重視。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-b-md font-semibold text-sky-700 flex justify-between items-center">
+                        1.3. なぜ今、LLMOが重要なのか？
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>ユーザー検索行動の変化:</strong> キーワード検索から自然言語での質問形式へ移行。AIチャットボットからの直接回答を好む傾向。</li>
+                            <li><strong>LLM市場の急成長:</strong> 世界のLLM市場は2024-2030年に年平均36%成長予測。従来検索利用は2026年までに25%減少、オーガニック検索トラフィックは2028年までに50%減少の可能性も。ChatGPTは月間26.3億訪問。</li>
+                            <li><strong>ブランド認知の新たな経路:</strong> LLMが製品やサービスを推奨する能力を持つ。</li>
+                            <li><strong>競争優位性の確立:</strong> 新分野であり、早期取り組みで先行者利益の可能性。</li>
+                            <li><strong>SEO努力の補完・強化:</strong> 質の高いSEO済みサイトはLLMにも価値ある情報源となり得る。</li>
+                        </ul>
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold text-slate-700 mb-2">LLM市場の成長予測</h4>
+                            <div class="chart-container bg-slate-100 p-2 rounded-md">
+                                <canvas id="llmMarketGrowthChart"></canvas>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-1 text-center">世界のLLM市場は年平均36%の成長が見込まれています。</p>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold text-slate-700 mb-2">検索エンジンの利用変化予測</h4>
+                            <div class="chart-container bg-slate-100 p-2 rounded-md">
+                                <canvas id="searchEngineUsageChart"></canvas>
+                            </div>
+                             <p class="text-sm text-slate-600 mt-1 text-center">従来の検索エンジン利用は減少し、AIによる情報取得が増加すると予測されています。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ai-mechanism" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">2. AIの情報参照メカニズムと最適化の方向性</h2>
+                <p class="mb-6">LLMOを効果的に行うためには、LLMが情報をどのように取得・評価し、回答を生成するのかを理解することが不可欠です。このセクションでは、そのメカニズムと、AIに好まれるコンテンツの特徴を解説します。</p>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-t-md font-semibold text-sky-700 flex justify-between items-center">
+                        2.1. LLMはどのように情報を取得し、信頼性を評価するのか
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-3">LLMの情報処理と信頼性評価は多層的です。</p>
+                        <dl>
+                            <dt class="font-semibold text-slate-700">トレーニングデータ:</dt>
+                            <dd class="mb-2 ml-4">書籍、論文、ウェブサイト、Wikipediaなど膨大なテキストデータで事前学習。文法、事実、推論パターンを学習。</dd>
+                            
+                            <dt class="font-semibold text-slate-700">RAG (検索拡張生成):</dt>
+                            <dd class="mb-2 ml-4">最新情報や専門知識に対応するため、回答生成前に外部の権威ある知識ベースやリアルタイム情報を参照。誤情報（ハルシネーション）低減や回答精度向上に寄与。</dd>
+
+                            <dt class="font-semibold text-slate-700">ソース選択とランキング:</dt>
+                            <dd class="mb-2 ml-4">統計的尤もらしさ、意味的関連性、文脈的一貫性に基づき回答候補をランク付け。ユーザー中心で包括的・正確な情報、権威性と信頼性が高い情報源（E-E-A-Tシグナル重要）を優先。Perplexity AIは事実精度、関連性、引用元信頼性、回答一貫性を重視。</dd>
+                        </dl>
+                        <p class="mt-3 text-sm text-slate-600">注意点: ChatGPTなどは権威性・正確性に課題がある場合も。ユーザーは批判的吟味が必要。</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-b-md font-semibold text-sky-700 flex justify-between items-center">
+                        2.2. AIが参照・引用しやすいコンテンツの特徴
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <ul class="list-disc list-inside space-y-3">
+                            <li><strong>明確性、構造、簡潔さ:</strong>
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>階層的な見出し (H1, H2, H3)</li>
+                                    <li>箇条書きや番号付きリスト</li>
+                                    <li>短いパラグラフ</li>
+                                    <li>FAQセクション（特に重要）</li>
+                                    <li>要約やTL;DRセクション</li>
+                                </ul>
+                            </li>
+                            <li><strong>意味的明瞭性とコンテキスト最適化:</strong>
+                                 <ul class="list-circle list-inside ml-6">
+                                    <li>曖昧でない一貫した用語使用</li>
+                                    <li>概念間の関係性が明確</li>
+                                    <li>類義語や関連用語の適切な使用（セマンティックSEO）</li>
+                                </ul>
+                            </li>
+                            <li><strong>会話型パターンと自然言語:</strong>
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>自然な会話の流れを模倣したQ&A形式</li>
+                                    <li>質問ベースのキーワードやフレーズへの最適化</li>
+                                </ul>
+                            </li>
+                            <li><strong>引用価値のあるコンテンツ:</strong>
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>独自の統計データ、調査結果、具体的な数値データ</li>
+                                    <li>専門家のコメントや独自の洞察</li>
+                                </ul>
+                            </li>
+                            <li><strong>鮮度と継続性:</strong>
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>定期的なコンテンツ更新</li>
+                                    <li>一貫した質の高い情報の継続的提供</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="llmo-strategies" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">3. 具体的なLLMO対策ノウハウ</h2>
+                <p class="mb-6">AIによる検索結果で優位性を確立するためには、戦略的かつ多角的なアプローチが必要です。ここでは、コンテンツ戦略から技術的実装、権威性構築に至る具体的なノウハウを詳述します。</p>
+
+                <div>
+                    <div class="mb-4 border-b border-slate-200">
+                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                            <button data-tab-target="#content-strategy" class="tab-button active-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-sky-500 text-sky-600">
+                                3.1 コンテンツ戦略
+                            </button>
+                            <button data-tab-target="#entity-optimization" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
+                                3.2 エンティティ最適化
+                            </button>
+                            <button data-tab-target="#structured-data" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
+                                3.3 構造化データ
+                            </button>
+                             <button data-tab-target="#authority-building" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
+                                3.4 権威性構築
+                            </button>
+                            <button data-tab-target="#llms-txt-sge" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300">
+                                3.5/3.6 llms.txt & SGE
+                            </button>
+                        </nav>
+                    </div>
+
+                    <div id="content-strategy" class="tab-content active">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">3.1. コンテンツ戦略：AIに「理解され、信頼され、引用される」ために</h3>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">E-E-A-Tの強化 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p>Google提唱のE-E-A-T（経験、専門性、権威性、信頼性）はLLM評価でも重要。</p>
+                                <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                    <li><strong>経験 (Experience):</strong> 実際の体験や一次情報に基づく記述。</li>
+                                    <li><strong>専門性 (Expertise):</strong> 作成者や監修者の専門性明示（経歴、資格など）。</li>
+                                    <li><strong>権威性 (Authoritativeness):</strong> 業界団体認定、専門誌寄稿、他権威サイトからの引用。</li>
+                                    <li><strong>信頼性 (Trustworthiness):</strong> 透明な情報開示、セキュリティ対策、客観的データ、肯定的なユーザーレビュー。</li>
+                                </ul>
+                                <p class="mt-2 text-sm text-red-600">特にYMYL（健康、金融など）分野では厳格評価。</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">質問応答型コンテンツの作成 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">ユーザーの具体的質問に直接回答するコンテンツはLLMに好まれます。「〇〇とは何か？」などに簡潔に回答。Google「他の人はこちらも質問」やAIサジェストを参考に。</div>
+                        </div>
+                         <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">包括的で権威あるコンテンツ <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">特定トピックを深く掘り下げ、包括的に解説。関連情報、背景知識、多様な視点を盛り込み、総合的理解を促す。</div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">引用・統計データの活用 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">オリジナル調査データや信頼できる第三者機関の統計を明示。引用元として選ばれる可能性向上。図表での視覚化も有効。</div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">コンテンツの構造化と書式設定 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <ul class="list-disc list-inside ml-4 space-y-1">
+                                    <li><strong>見出し構造:</strong> H1, H2, H3タグで論理構造を明確化。</li>
+                                    <li><strong>リスト形式:</strong> 箇条書き、番号付きリストで情報整理。</li>
+                                    <li><strong>表形式:</strong> 比較情報や仕様データの可読性向上。</li>
+                                    <li><strong>FAQページ作成とFAQPageスキーマ実装:</strong> LLMOで非常に有効。</li>
+                                    <li><strong>コンテンツサマリー、TL;DRセクション:</strong> 長文内容の核心をAIが素早く把握。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="entity-optimization" class="tab-content">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">3.2. エンティティ最適化（Entity Optimization）</h3>
+                        <p class="mb-3">LLMや検索エンジンがブランドや製品などを「実体（エンティティ）」として正確に認識し、文脈で関連付けられるようにするプロセスです。</p>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">エンティティとは <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">明確に定義可能な「概念」や「事物」（人名、組織名、製品名など）。キーワードが単語に焦点を当てるのに対し、エンティティは意味や他との関係性に依存。</div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">エンティティ最適化の重要性 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">LLMはエンティティとその関係性を記述したナレッジグラフを参照。明確なエンティティ認識は、AIによる適切な言及や関連クエリとの結びつきに不可欠。</div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">具体的なフレームワーク <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li><strong>エンティティの特定:</strong> ブランド、製品、関連トピック、人物などを網羅的にリストアップ。</li>
+                                    <li><strong>エンティティマップの構築:</strong> エンティティ間の関係性を視覚化・整理。定義、同義語、属性も記録。</li>
+                                    <li><strong>コンテンツへの統合と深化:</strong> ウェブサイトコンテンツでエンティティを明確・一貫して使用。定義や背景を説明し、情報を深掘り。</li>
+                                    <li><strong>NAP情報の一貫性維持:</strong> 名称(Name)・住所(Address)・電話番号(Phone)を全オンラインチャネルで完全統一。</li>
+                                    <li><strong>内部リンクと外部リンク戦略:</strong> 関連エンティティページを内部リンクで結束。権威ある外部サイトからのリンク獲得。</li>
+                                    <li><strong>スキーママークアップの実装:</strong> `Organization`, `Product` など適切なスキーマでエンティティ情報を構造化。`SameAs`で外部権威情報源と結びつけ。</li>
+                                    <li><strong>定期的な情報の更新と維持:</strong> エンティティ情報の変化を速やかに反映。</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="structured-data" class="tab-content">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">3.3. 構造化データとスキーママークアップ</h3>
+                        <p class="mb-3">ウェブコンテンツの内容、文脈、エンティティ間関係性をLLMがより正確・効率的に理解するための技術的手段です。</p>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">構造化データの役割とLLMへの影響 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="mb-2">ウェブ情報をAIが解釈しやすい標準形式で提供。コンテンツの背後にある意味構造をAIに伝える「翻訳ガイド」。Googleリッチリザルト表示にも貢献。</p>
+                                <p>Googleは「直接影響とは限らない」としつつも理解・分類に重要と評価。Microsoft Bingは役立つと明言。RAGシステムでは処理効率や生成精度向上事例あり。</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">推奨されるスキーマタイプ <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <li>`FAQPage` (Q&Aコンテンツ)</li>
+                                    <li>`Article`, `BlogPosting`, `NewsArticle` (記事)</li>
+                                    <li>`Product` (製品情報)</li>
+                                    <li>`HowTo` (手順解説)</li>
+                                    <li>`Organization` (企業・組織情報)</li>
+                                    <li>`Person` (人物情報)</li>
+                                    <li>`Event` (イベント情報)</li>
+                                    <li>`Recipe` (レシピ)</li>
+                                    <li>`LocalBusiness` (地域ビジネス)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">効果的な実装戦略と注意点 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="font-semibold">戦略:</p>
+                                <ol class="list-decimal list-inside ml-4 mb-2">
+                                    <li>階層化情報の可視化 (FAQPage活用)</li>
+                                    <li>時系列データの構造化 (`lastUpdated`重視)</li>
+                                    <li>クロスリファレンスの最適化 (`isRelatedTo`等で連結)</li>
+                                </ol>
+                                <p class="font-semibold">注意点:</p>
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>過剰マークアップのリスク (スパム判定回避)</li>
+                                    <li>メンテナンス負荷増大の可能性</li>
+                                    <li>表示の不整合リスク (リッチリザルトテストで確認)</li>
+                                </ul>
+                                <p class="mt-2 text-sm">「必要な情報を、正確に、最小限のマークアップで」が基本。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="authority-building" class="tab-content">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">3.4. 権威性の構築（デジタルPR、UGC、Wikipedia）</h3>
+                        <p class="mb-3">LLMは情報源の権威性を重視。自社ブランドやコンテンツが権威ある存在としてAIに認識されるための施策です。</p>
+                         <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">デジタルPRによるブランド・トピック関連性強化 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li><strong>信頼できる媒体への露出:</strong> 業界専門ニュースサイト、ビジネス誌オンライン版などへ情報提供し記事掲載や引用を目指す。</li>
+                                    <li><strong>オリジナルリサーチや業界レポートの公開:</strong> 市場調査、動向分析、ホワイトペーパー公開でソートリーダーシップ確立。</li>
+                                    <li><strong>プレスリリースの戦略的活用:</strong> 企業活動ニュースに業界や社会への価値という文脈を付加。</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">ユーザー生成コンテンツ（UGC）の活用 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="mb-2">製品レビュー、フォーラム議論、Q&Aサイト、SNS言及など。特に英語圏ではRedditが重視される。日本の類似プラットフォームも有効。</p>
+                                <p class="mb-2"><strong>ポイント:</strong> 良好な顧客体験提供が基本。オンラインコミュニティでの誠実な対話。品質モニタリングと公式情報での補足も考慮。</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">Wikipediaページの獲得と維持 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="mb-2">多くのLLMの主要学習データソースであり強力な権威シグナル。</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li><strong>掲載のハードル:</strong> 「特筆性」「検証可能性」「中立的観点」の厳格なガイドライン。宣伝目的は不可。</li>
+                                    <li><strong>戦略的アプローチ:</strong> まず外部信頼情報源での実績を積む。経験ある第三者による客観的記述でのページ作成・維持が理想。</li>
+                                    <li><strong>Googleナレッジグラフへの影響:</strong> 掲載でナレッジグラフに取り込まれやすくなる可能性。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="llms-txt-sge" class="tab-content">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">3.5. `llms.txt` の役割と現状</h3>
+                         <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">`llms.txt` とは <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="mb-2">ウェブサイト運営者がLLMクローラーにコンテンツアクセスや利用方法を指示する提案プロトコル。`robots.txt`のLLM版のような役割を目指す。</p>
+                                <p class="mb-2"><strong>形式:</strong> ルートに `llms.txt` (リソースリンク集) または `llms-full.txt` (全コンテンツMarkdown) を配置。</p>
+                                <p class="mb-2"><strong>期待効果:</strong> コンテンツ処理効率化、事実精度向上、関連性向上、コンテキストウィンドウ制限対応。</p>
+                                <p><strong>採用状況と課題:</strong> 主要AI企業の公式サポートは限定的/未確認。一部ツールやコミュニティで対応の動き。標準化されておらず遵守は任意。悪用やUX低下の懸念も。</p>
+                                <p class="mt-2"><strong>推奨事項:</strong> 現状は実験的・投機的。将来性を見据え、動向注視しつつ実験的導入を検討。あくまで補完的手段。</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-3">3.6. Google SGE (AI Overviews) 対策</h3>
+                         <div class="accordion-item mb-3 border rounded-md">
+                            <button class="accordion-header w-full text-left p-3 bg-slate-100 hover:bg-slate-200 font-medium flex justify-between items-center">SGE/AI Overviews と対策 <i class="fas fa-chevron-down"></i></button>
+                            <div class="accordion-content p-3 border-t">
+                                <p class="mb-2">Google検索最上部にAI生成要約回答を表示。ユーザー体験を大きく変える可能性。「ゼロクリックサーチ」増加でトラフィック減の可能性も。</p>
+                                <p class="font-semibold mb-1">対策の方向性:</p>
+                                <ul class="list-disc list-inside ml-4 space-y-1">
+                                    <li>高品質でE-E-A-Tに優れたコンテンツ</li>
+                                    <li>構造化データ活用 (特にFAQPageスキーマ)</li>
+                                    <li>明確なQ&A形式コンテンツ</li>
+                                    <li>Googleビジネスプロフィールの最適化</li>
+                                    <li>情報の鮮度維持</li>
+                                    <li>引用元としての選定を目指す</li>
+                                    <li>関連性の高い画像・動画の活用</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="success-path" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">4. 成功への道：事例と効果測定</h2>
+                <p class="mb-6">LLMO戦略を成功に導くためには、先行事例から学び、その効果を適切に測定することが不可欠です。このセクションでは、国内外の成功事例の概要と、LLMOの効果測定における主要なKPIやツール活用について解説します。</p>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-t-md font-semibold text-sky-700 flex justify-between items-center">
+                        4.1. LLMO導入の成功事例（海外中心）
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-3">日本国内の数値データ付き事例は限定的ですが、海外では顕著な成果報告があります。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-3 border rounded-md bg-slate-50">
+                                <h4 class="font-semibold text-slate-700">Thomson Healthcare</h4>
+                                <p class="text-sm">患者の質問に答えるコンテンツへ転換 → オーガニックトラフィック <span class="font-bold text-green-600">78%増</span>。</p>
+                            </div>
+                            <div class="p-3 border rounded-md bg-slate-50">
+                                <h4 class="font-semibold text-slate-700">CloudFix (Contently事例)</h4>
+                                <p class="text-sm">AWSコスト最適化質問中心に再構築 → 4週間でPerplexityで関連クエリ1位。新規依頼の <span class="font-bold text-green-600">32%</span>がAI検索経由。</p>
+                            </div>
+                            <div class="p-3 border rounded-md bg-slate-50">
+                                <h4 class="font-semibold text-slate-700">Hedges & Company</h4>
+                                <p class="text-sm">スキーマ実装、llms.txt設置等 → AI参照トラフィックが数件/月から <span class="font-bold text-green-600">300件</span>へ。AI Overviews表示キーワード <span class="font-bold text-green-600">1,417件</span> (0件から)。</p>
+                            </div>
+                            <div class="p-3 border rounded-md bg-slate-50">
+                                <h4 class="font-semibold text-slate-700">SearchPilot & Canva</h4>
+                                <p class="text-sm">FAQコンテンツをQ&A形式+FAQPageスキーマ化 → Geminiでの引用元トップ提示率 <span class="font-bold text-green-600">12% → 38%</span>。新規サインアップ数 <span class="font-bold text-green-600">29%増</span> (6週間)。</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 font-semibold">成功要因の共通点:</p>
+                        <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                            <li>高品質でE-E-A-Tの高いコンテンツ</li>
+                            <li>ユーザーの具体的質問に答える形式</li>
+                            <li>構造化データ（特にFAQスキーマ）の実装</li>
+                            <li>エンティティ情報確立と権威性構築</li>
+                            <li>コミュニティエンゲージメント活用</li>
+                        </ul>
+                        <div class="mt-4">
+                             <h4 class="text-lg font-semibold text-slate-700 mb-2">事例: CanvaのGemini引用率向上</h4>
+                            <div class="chart-container bg-slate-100 p-2 rounded-md">
+                                <canvas id="canvaGeminiChart"></canvas>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-1 text-center">FAQコンテンツの最適化により、Google Geminiでの引用率が大幅に向上しました。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 font-semibold text-sky-700 flex justify-between items-center">
+                        4.2. LLMO戦略の主要KPI
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-2 font-semibold">直接的なLLMO指標:</p>
+                        <ul class="list-disc list-inside ml-4 mb-3 text-sm space-y-1">
+                            <li>AIによる引用頻度・ブランド言及数</li>
+                            <li>AI Overviewやアンサーボックスでの引用・表示</li>
+                            <li>AI回答におけるシェア・オブ・ボイス（SOV）</li>
+                            <li>言及のセンチメント（論調分析）</li>
+                            <li>情報の正確性</li>
+                        </ul>
+                        <p class="mb-2 font-semibold">間接的・遅行的なLLMO指標:</p>
+                        <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                            <li>AIプラットフォームからの参照トラフィック</li>
+                            <li>ブランド名での検索数増加</li>
+                            <li>ダイレクトトラフィックの増加</li>
+                            <li>リード獲得・コンバージョン（自己申告属性など）</li>
+                            <li>AI経由トラフィックのエンゲージメント指標</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-b-md font-semibold text-sky-700 flex justify-between items-center">
+                        4.3. AIプラットフォームからの参照トラフィック分析と追跡
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-2"><strong>トラッキングの課題:</strong> LLMプラットフォームは標準リファラ情報を正確に送信しない場合があり、参照元特定が困難。「(not set)」や「direct」に分類されることも。</p>
+                        <p class="mb-2 font-semibold">GA4での対応策:</p>
+                        <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                            <li><strong>カスタムチャネルグループ設定:</strong> 主要LLMプラットフォームドメインを「AI Referrals」等として定義。</li>
+                            <li><strong>セグメント作成:</strong> AIプラットフォームからのトラフィック特化セグメントで行動分析。</li>
+                            <li><strong>ランディングページ分析:</strong> 流入ランディングページからユーザーのAI利用状況を推測。</li>
+                        </ul>
+                        <p class="mt-2">その他、手動サンプリングとテスト、サーバーログ監視も有効。確立された手法は少なく試行錯誤段階。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="japan-market" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">5. 日本市場におけるLLMOコンサルティングの展望と課題</h2>
+                <p class="mb-6">日本国内でもLLMOへの関心が高まりつつありますが、特有の課題と機会が存在します。このセクションでは、日本企業の動向、市場特有の論点、そして戦略適応のポイントを考察します。</p>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-t-md font-semibold text-sky-700 flex justify-between items-center">
+                        5.1. 日本企業のLLMOへの関心と導入状況
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="mb-2">AI検索の台頭で従来SEOへの危機感が広がりつつあります。企業からは「AI回答で検索順位が低下/トラフィック減」「具体的ノウハウが不明」「社内リソース不足」といった声が聞かれます。</p>
+                        <p class="mb-2">LLMO/AIOは黎明期で用語定義や効果測定指標も進化途上ですが、早期対応の必要性は認識されつつあります。</p>
+                        <p>国内でもニュートラルワークス、カスタマークラウド、インティメート・マージャー、PLAN-BなどがLLMO関連サービスを開始しており、専門的支援への需要を示しています。</p>
+                         <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-slate-700 mb-2">日本企業のLLMO課題意識 (イメージ)</h4>
+                            <div class="chart-container bg-slate-100 p-2 rounded-md">
+                                <canvas id="japanChallengesChart"></canvas>
+                            </div>
+                             <p class="text-sm text-slate-600 mt-1 text-center">多くの企業がノウハウ不足やリソース不足を感じています。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 font-semibold text-sky-700 flex justify-between items-center">
+                        5.2. 日本市場特有の課題と機会
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <p class="font-semibold mb-1">課題:</p>
+                        <ul class="list-disc list-inside ml-4 mb-3 text-sm space-y-1">
+                            <li><strong>言語の壁とローカライゼーション:</strong> 最新情報やツールは英語圏中心。日本語環境での有効性検証が必要。</li>
+                            <li><strong>国内LLMの動向と最適化:</strong> NTT「tsuzumi」など国内LLMへの対応も将来的に必要となる可能性。</li>
+                            <li><strong>用語の標準化と市場認知:</strong> 「LLMO」「GEO」「AIO」など用語に揺らぎ。クライアントとの定義共有が重要。</li>
+                        </ul>
+                        <p class="font-semibold mb-1">機会:</p>
+                        <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                            <li>上記課題は大きな市場機会。日本市場特性を理解し、ローカライズされた戦略・ソリューション提供事業者への需要増が予測される。</li>
+                            <li>日本語環境に最適化された分析ツール、導入・運用ノウハウ、日本企業向け成功事例の蓄積が競争優位に。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-4 border border-slate-200 rounded-md">
+                    <button class="accordion-header w-full text-left p-4 bg-sky-50 hover:bg-sky-100 rounded-b-md font-semibold text-sky-700 flex justify-between items-center">
+                        5.3. 日本企業へのLLMO戦略適応のポイント
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content p-4 border-t border-slate-200">
+                        <ol class="list-decimal list-inside space-y-2 text-sm">
+                            <li><strong>日本語の言語特性への深い理解と対応:</strong> 自然で高品質な日本語コンテンツ、曖昧性排除、国内LLM特性考慮。</li>
+                            <li><strong>国内の情報源と権威構造の活用:</strong> 日本の権威ある情報源からの評価獲得、ローカルなE-E-A-Tシグナル構築。</li>
+                            <li><strong>日本市場向けツールの選定と日本語サポート体制:</strong> 日本語対応ツール探索・活用、日本語での分析・レポーティング。</li>
+                            <li><strong>日本の文化的背景とユーザー行動の理解:</strong> 共感と信頼重視のコミュニケーション、口コミ・評判への敏感さ考慮。</li>
+                            <li><strong>日本企業特有の課題への対応:</strong> 実践的ノウハウ提供と伴走支援、スモールスタート推奨。</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="tools" class="pt-16 bg-white shadow-lg rounded-lg mb-8 p-6">
+                <h2 class="text-2xl font-bold text-sky-600 mb-6 border-b-2 border-sky-200 pb-2">6. LLMO/GEO/AIO関連ツール</h2>
+                <p class="mb-6">LLMO戦略を支援するための様々なツールが登場しています。ここでは主要な海外製ツールと、日本市場向けのツールや考慮事項を紹介します。</p>
+
+                <h3 class="text-xl font-semibold text-slate-700 mb-3">海外製の主要ツール群</h3>
+                <p class="mb-4 text-sm">多くは英語圏中心。日本語対応はツールにより異なります。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Profound</h4>
+                        <p class="text-xs">主要AIプラットフォームでのブランド可視性追跡。会話データ分析。エンタープライズ向け。</p>
+                    </div>
+                    <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Scrunch AI</h4>
+                        <p class="text-xs">AI回答でのブランド言及数、ランキング、センチメント分析。競合比較、コンテンツギャップ検出。</p>
+                    </div>
+                    <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Otterly.AI</h4>
+                        <p class="text-xs">質問検索ボリューム、AI回答引用順、競合分析。日本での完全対応は要確認。</p>
+                    </div>
+                     <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Peec AI</h4>
+                        <p class="text-xs">多様なAIプラットフォーム対応のブランド可視性分析。カスタムプロンプト管理、競合トラッキング。</p>
+                    </div>
+                    <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Ahrefs</h4>
+                        <p class="text-xs">「Brand Radar」等LLMO応用可能機能。LLMモニタリング機能も提供開始の模様。</p>
+                    </div>
+                     <div class="p-4 border rounded-md bg-slate-50">
+                        <h4 class="font-semibold text-slate-700">Semrush</h4>
+                        <p class="text-xs">「Semrush Copilot」でSEO指標と生成AI洞察を組み合わせ分析。LLMモニタリング機能も。</p>
+                    </div>
+                </div>
+                <p class="text-sm mb-4">その他: Surfer SEO, MarketMuse, Clearscope, Jasper (SEO Mode) など多数。</p>
+
+                <h3 class="text-xl font-semibold text-slate-700 mb-3">日本市場向けツールおよび考慮事項</h3>
+                 <ul class="list-disc list-inside space-y-2 text-sm">
+                    <li><strong>国産AI検索ツールの動向:</strong> 「Felo」など日本開発ツールの普及と特化最適化の可能性。</li>
+                    <li><strong>既存国産SEOツールの対応:</strong> 「Keywordmap」「ミエルカ」なども将来的にLLMO関連機能強化が予想される。</li>
+                    <li><strong>国内代理店の独自サービス・調査:</strong> PLAN-B「LLMO対策状況調査サービス」など、日本市場特性を踏まえたインサイト提供。</li>
+                    <li><strong>日本語対応の課題:</strong> 海外製ツールの日本語対応度や精度、国内AIプラットフォームへの適合性が選定ポイント。</li>
+                </ul>
+            </section>
+            
+            <footer class="text-center py-8 text-slate-600 border-t mt-12">
+                <p>&copy; <span id="currentYear"></span> LLMO対策コンサルティング戦略 SPA. All rights reserved.</p>
+                <p class="text-sm">本コンテンツは「LLMO対策コンサルティング調査」レポートに基づき作成されました。</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <button id="scrollToTopBtn" title="Go to top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Accordion
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+                    content.classList.toggle('open');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+
+            // Tabs
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active-tab', 'border-sky-500', 'text-sky-600');
+                        btn.classList.add('border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300');
+                    });
+                    button.classList.add('active-tab', 'border-sky-500', 'text-sky-600');
+                    button.classList.remove('border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300');
+                    
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.querySelector(button.dataset.tabTarget).classList.add('active');
+                });
+            });
+
+            // Sidebar toggle for mobile
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+
+            mobileMenuButton.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.toggle('md:block'); // Keep it visible on md and up if it was open
+            });
+            
+            // Close sidebar when a link is clicked on mobile
+            const sidebarLinks = sidebar.querySelectorAll('a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // md breakpoint
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                    // Smooth scroll
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+
+            // Active sidebar item highlighting based on scroll
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.sidebar-item');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) { // Adjusted offset for better UX
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+
+            // Current year for footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+            
+            // Charts
+            // 1. LLM Market Growth Chart
+            const llmMarketCtx = document.getElementById('llmMarketGrowthChart').getContext('2d');
+            new Chart(llmMarketCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                    datasets: [{
+                        label: 'LLM市場規模 (予測成長率 年平均36%)',
+                        data: [100, 136, 185, 251, 342, 465, 632], // Dummy data representing 36% CAGR from 100 base
+                        backgroundColor: 'rgba(3, 105, 161, 0.7)', // sky-700
+                        borderColor: 'rgba(3, 105, 161, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, ticks: { callback: function(value) { return value + ' (相対値)';} } } },
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': ' + context.parsed.y + ' (相対値)'; } } } }
+                }
+            });
+
+            // 2. Search Engine Usage Chart
+            const searchEngineCtx = document.getElementById('searchEngineUsageChart').getContext('2d');
+            new Chart(searchEngineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [{
+                        label: '従来型検索エンジンの利用率 (予測)',
+                        data: [100, 95, 85, 75, 65, 50], // Dummy data representing decline
+                        borderColor: 'rgba(239, 68, 68, 0.7)', // red-500
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.1,
+                        fill: true
+                    },
+                    {
+                        label: 'AI検索の利用率 (予測)',
+                        data: [5, 15, 30, 45, 60, 75], // Dummy data representing increase
+                        borderColor: 'rgba(22, 163, 74, 0.7)', // green-600
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        tension: 0.1,
+                        fill: true
+                    }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: function(value) { return value + '%';} } } },
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': ' + context.parsed.y + '%'; } } } }
+                }
+            });
+
+            // 3. Canva Gemini Chart
+            const canvaGeminiCtx = document.getElementById('canvaGeminiChart').getContext('2d');
+            new Chart(canvaGeminiCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['施策前', '施策後'],
+                    datasets: [{
+                        label: 'Google GeminiでのCanva引用率 (%)',
+                        data: [12, 38],
+                        backgroundColor: ['rgba(234, 179, 8, 0.7)', 'rgba(34, 197, 94, 0.7)'], // yellow-500, green-500
+                        borderColor: ['rgba(234, 179, 8, 1)', 'rgba(34, 197, 94, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max:50, ticks: { callback: function(value) { return value + '%';} } } },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(context) { return '引用率: ' + context.parsed.y + '%'; } } } }
+                }
+            });
+            
+            // 4. Japan Challenges Chart
+            const japanChallengesCtx = document.getElementById('japanChallengesChart').getContext('2d');
+            new Chart(japanChallengesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['ノウハウ不足', 'リソース不足', '効果測定不明', 'その他'],
+                    datasets: [{
+                        label: '日本企業のLLMO課題意識',
+                        data: [45, 30, 15, 10], // Dummy data
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)', // red-500
+                            'rgba(249, 115, 22, 0.7)', // orange-500
+                            'rgba(234, 179, 8, 0.7)', // yellow-500
+                            'rgba(163, 163, 163, 0.7)' // neutral-400
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: function(context) { return context.label + ': ' + context.parsed + '%'; } } } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
